@@ -1,3 +1,4 @@
+
 /*--------------------
   Logic Function
 --------------------*/
@@ -64,8 +65,9 @@ function difficultyChioce(){
   function bombField(num){
   const allBoxes = document.getElementsByClassName("box");
   const listBomb = generateBombField(num);
+  listBomb.sort((a,b) => a - b);
   //Testing console print
-  console.log(listBomb.sort());
+  console.log(listBomb);
   for (let i = 0; i <= allBoxes.length; i++){
     if (listBomb.includes(i+1)){
       allBoxes[i].classList.add("bomb");
@@ -84,20 +86,34 @@ function difficultyChioce(){
     bombField(num);
   }
 
-  
-
+  function listABomb(){
+    let list = []
+    const boxDiv = document.getElementsByClassName("box");
+    for (let i = 0; i < boxDiv.length; i++){
+      if (boxDiv[i].className.split(" ").includes("bomb")){
+        list.push(Number(boxDiv[i].textContent));
+      }
+    }
+    return list;
+  }
 /*--------------------
         Main
 --------------------*/
 
+
+let mode = difficultyChioce()
+drawField(rangeSize(mode));
+
 let flag = true;
 let points = 0;
+let bombList = listABomb();
 let choiceNumbers = [];
 
+console.log(bombList);
 
-let mode = difficultyChioce();
 
-drawField(rangeSize(mode));
+
+
 
 // let numInBombField = generateBombField(rangeSize(mode));
 // console.log(numInBombField);
