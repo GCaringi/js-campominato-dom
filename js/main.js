@@ -1,8 +1,12 @@
+/*--------------------
+  Logic Function
+--------------------*/
+
 function difficultyChioce(){
     let difficulty;
     do{
-      difficulty = Number(prompt("Scegli difficoltà\n0 - Easy Mode\n1 - Normal Mode\n2 - Hard Mode"));
-    }while (isNaN(difficulty) || difficulty < 0 || difficulty > 2 || !Number.isInteger(difficulty));
+      difficulty = Number(prompt("Scegli difficoltà\n0 - Easy Mode\n1 - Normal Mode\n2 - Hard Mode\n3 - Debug Mode"));
+    }while (isNaN(difficulty) || difficulty < 0 || difficulty > 3 || !Number.isInteger(difficulty));
     return difficulty;
   }
   
@@ -23,6 +27,8 @@ function difficultyChioce(){
       return range = 100;
     }else if ( mode === 1){
       return range = 80;
+    }else if (mode === 2){
+      return range = 50;
     }else{
       return range = 20;
     }
@@ -51,9 +57,39 @@ function difficultyChioce(){
           return false;
       }
   }
+ 
+/*--------------------
+     DOM Function
+--------------------*/
+  function bombField(num){
+  const allBoxes = document.getElementsByClassName("box");
+  const listBomb = generateBombField(num);
+  //Testing console print
+  console.log(listBomb.sort());
+  for (let i = 0; i <= allBoxes.length; i++){
+    if (listBomb.includes(i+1)){
+      allBoxes[i].classList.add("bomb");
+    }
+  }
+  }
+
+  function drawField(num){
+    const rowContainer = document.querySelector(".row");
+    for (let i = 0; i < num; i++){
+      const boxDiv = document.createElement("div")
+      boxDiv.classList.add("box");
+      boxDiv.innerText = i+1;
+      rowContainer.append(boxDiv);
+    }
+    bombField(num);
+  }
+
   
-  
-  
+
+/*--------------------
+        Main
+--------------------*/
+
 let flag = true;
 let points = 0;
 let choiceNumbers = [];
@@ -61,27 +97,29 @@ let choiceNumbers = [];
 
 let mode = difficultyChioce();
 
-let numInBombField = generateBombField(rangeSize(mode));
+drawField(rangeSize(mode));
 
+// let numInBombField = generateBombField(rangeSize(mode));
+// console.log(numInBombField);
 
-while(flag && points < rangeSize(mode) - 16){
+// while(flag && points < rangeSize(mode) - 16){
 
-    let choiceNum = numberChoice(rangeSize(mode));
+//     let choiceNum = numberChoice(rangeSize(mode));
 
-    while(isInArray(choiceNum, choiceNumbers)){
-        choiceNum = numberChoice(rangeSize(mode))
-    }
+//     while(isInArray(choiceNum, choiceNumbers)){
+//         choiceNum = numberChoice(rangeSize(mode))
+//     }
 
-    if (isValid(choiceNum, numInBombField)){
-        choiceNumbers.push(choiceNum);
-        points ++;
-    }else{
-        flag = false;
-    }
-}
+//     if (isValid(choiceNum, numInBombField)){
+//         choiceNumbers.push(choiceNum);
+//         points ++;
+//     }else{
+//         flag = false;
+//     }
+// }
 
-if (points === rangeSize(mode) - 16){
-    console.log("Hai vinto!!!! Punti totali " + points);
-}else{
-    console.log("Hai perso. Hai totalizzato " + points + " punti");
-}
+// if (points === rangeSize(mode) - 16){
+//     console.log("Hai vinto!!!! Punti totali " + points);
+// }else{
+//     console.log("Hai perso. Hai totalizzato " + points + " punti");
+// }
