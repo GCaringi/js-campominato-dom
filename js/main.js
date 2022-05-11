@@ -1,3 +1,12 @@
+/*--------------------
+   Global Variable
+--------------------*/
+
+let flag = true;
+let points = 0;
+let buttonValue;
+let bombList = [];
+
 
 /*--------------------
   Logic Function
@@ -62,19 +71,21 @@ function difficultyChioce(){
 /*--------------------
      DOM Function
 --------------------*/
-  function bombField(num){
+
+function bombField(num){
   const allBoxes = document.getElementsByClassName("box");
   const listBomb = generateBombField(num);
   listBomb.sort((a,b) => a - b);
   //Testing console print
   console.log(listBomb);
+  //Faccio side effect sulla variabile globale
   bombList.push(...listBomb);
   for (let i = 0; i <= allBoxes.length; i++){
     if (listBomb.includes(i+1)){
       allBoxes[i].classList.add("bomb");
     }
   }
-  }
+}
 
   function drawField(num){
     const rowContainer = document.querySelector(".play-field");
@@ -87,16 +98,23 @@ function difficultyChioce(){
     bombField(num);
   }
 
-  function listABomb(){
-    let list = []
-    const boxDiv = document.getElementsByClassName("box");
-    for (let i = 0; i < boxDiv.length; i++){
-      if (boxDiv[i].className.split(" ").includes("bomb")){
-        list.push(Number(boxDiv[i].textContent));
-      }
+  function chose(){
+    console.log("Ho scelto il " + this.textContent)
+    if (bombList.includes(Number(this.textContent))){
+      flag = false;
+      console.log("Faccio vedere la morte", points);
+    }else{
+      this.classList.add("clear");
+      points++;
     }
-    return list;
+  
+    if (points == 20-16){
+      console.log("Faccio vedere la vincita");
+    }
+  
+    this.removeEventListener("click", chose, true);
   }
+
 /*--------------------
         Main
 --------------------*/
@@ -144,29 +162,29 @@ btnHard.addEventListener("click",
     }
 )
 
+
+
 btnDebug.addEventListener("click", 
     function(){
         const menuStart = document.getElementById("start-menu");
         menuStart.style.display = "none";
         const playMenu = document.getElementById("play-menu");
         playMenu.style.display = "flex";
+        buttonValue = 3;
+        const allBoxes = document.getElementsByClassName("box");
+        for (let i = 0; i < allBoxes.length; i++){
+          const oneBox =allBoxes[i];
+          oneBox.addEventListener("click", chose, true);
+        }
     }
 )
 
 //PlayField
 
+
+
 // let mode = difficultyChioce()
 // drawField(rangeSize(mode));
-
-let flag = true;
-let points = 0;
-let bombList = listABomb();
-let choiceNumbers = [];
-
-console.log("side-effect", bombList);
-
-
-
 // let numInBombField = generateBombField(rangeSize(mode));
 // console.log(numInBombField);
 
