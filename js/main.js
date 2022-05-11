@@ -68,6 +68,7 @@ function difficultyChioce(){
   listBomb.sort((a,b) => a - b);
   //Testing console print
   console.log(listBomb);
+  bombList.push(...listBomb);
   for (let i = 0; i <= allBoxes.length; i++){
     if (listBomb.includes(i+1)){
       allBoxes[i].classList.add("bomb");
@@ -162,9 +163,7 @@ let points = 0;
 let bombList = listABomb();
 let choiceNumbers = [];
 
-console.log(bombList);
-
-
+console.log("side-effect", bombList);
 
 
 
