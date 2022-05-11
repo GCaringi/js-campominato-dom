@@ -76,7 +76,7 @@ function difficultyChioce(){
   }
 
   function drawField(num){
-    const rowContainer = document.querySelector(".row");
+    const rowContainer = document.querySelector(".play-field");
     for (let i = 0; i < num; i++){
       const boxDiv = document.createElement("div")
       boxDiv.classList.add("box");
@@ -100,9 +100,62 @@ function difficultyChioce(){
         Main
 --------------------*/
 
+//Starter Menu
 
-let mode = difficultyChioce()
-drawField(rangeSize(mode));
+const btnEasy = document.getElementById("btn-easy");
+const btnNormal = document.getElementById("btn-normal");
+const btnHard = document.getElementById("btn-hard");
+const btnDebug = document.getElementById("btn-debug");
+
+
+document.addEventListener("keyup",
+    event => {
+        if (event.code === "Space"){
+            btnDebug.style.display = "block"
+        }
+    }
+)
+
+btnEasy.addEventListener("click",
+    function (){
+        const menuStart = document.getElementById("start-menu");
+        menuStart.style.display = "none";
+        const playMenu = document.getElementById("play-menu");
+        playMenu.style.display = "flex"; 
+    }
+)
+
+btnNormal.addEventListener("click", 
+    function(){
+        const menuStart = document.getElementById("start-menu");
+        menuStart.style.display = "none";
+        const playMenu = document.getElementById("play-menu");
+        playMenu.style.display = "flex";
+    }
+)
+
+btnHard.addEventListener("click", 
+    function(){
+        const menuStart = document.getElementById("start-menu");
+        menuStart.style.display = "none";
+        const playMenu = document.getElementById("play-menu");
+        playMenu.style.display = "flex";
+    }
+)
+
+btnDebug.addEventListener("click", 
+    function(){
+        const menuStart = document.getElementById("start-menu");
+        menuStart.style.display = "none";
+        const playMenu = document.getElementById("play-menu");
+        playMenu.style.display = "flex";
+    }
+)
+
+//PlayField
+
+// let mode = difficultyChioce()
+// drawField(rangeSize(mode));
 
 let flag = true;
 let points = 0;
