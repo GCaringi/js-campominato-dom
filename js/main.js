@@ -6,7 +6,7 @@ let flag = true;
 let points = 0;
 let buttonValue;
 let bombList = [];
-
+let rangeTry;
 
 /*--------------------
   Logic Function
@@ -103,13 +103,15 @@ function bombField(num){
     if (bombList.includes(Number(this.textContent))){
       flag = false;
       console.log("Faccio vedere la morte", points);
+      looseTab.style.display = "flex"
     }else{
       this.classList.add("clear");
       points++;
     }
   
-    if (points == 20-16){
-      console.log("Faccio vedere la vincita");
+    if (points == rangeTry){
+      console.log("Hai vinto");
+      winnerTab.style.display = "flex";
     }
   
     this.removeEventListener("click", chose, true);
@@ -125,6 +127,9 @@ const btnEasy = document.getElementById("btn-easy");
 const btnNormal = document.getElementById("btn-normal");
 const btnHard = document.getElementById("btn-hard");
 const btnDebug = document.getElementById("btn-debug");
+const winnerTab = document.getElementById("winner-tab");
+const looseTab = document.getElementById("loose-tab");
+
 
 
 document.addEventListener("keyup",
@@ -140,7 +145,14 @@ btnEasy.addEventListener("click",
         const menuStart = document.getElementById("start-menu");
         menuStart.style.display = "none";
         const playMenu = document.getElementById("play-menu");
-        playMenu.style.display = "flex"; 
+        playMenu.style.display = "flex";
+        buttonValue = 0;
+        rangeTry = rangeSize(buttonValue)-16;
+        const allBoxes = document.getElementsByClassName("box");
+        for (let i = 0; i < allBoxes.length; i++){
+          const oneBox =allBoxes[i];
+          oneBox.addEventListener("click", chose, true);
+        }
     }
 )
 
@@ -150,6 +162,13 @@ btnNormal.addEventListener("click",
         menuStart.style.display = "none";
         const playMenu = document.getElementById("play-menu");
         playMenu.style.display = "flex";
+        buttonValue = 1;
+        rangeTry = rangeSize(buttonValue)-16;
+        const allBoxes = document.getElementsByClassName("box");
+        for (let i = 0; i < allBoxes.length; i++){
+          const oneBox =allBoxes[i];
+          oneBox.addEventListener("click", chose, true);
+        }
     }
 )
 
@@ -159,6 +178,13 @@ btnHard.addEventListener("click",
         menuStart.style.display = "none";
         const playMenu = document.getElementById("play-menu");
         playMenu.style.display = "flex";
+        buttonValue = 2;
+        rangeTry = rangeSize(buttonValue)-16;
+        const allBoxes = document.getElementsByClassName("box");
+        for (let i = 0; i < allBoxes.length; i++){
+          const oneBox =allBoxes[i];
+          oneBox.addEventListener("click", chose, true);
+        }
     }
 )
 
@@ -171,6 +197,7 @@ btnDebug.addEventListener("click",
         const playMenu = document.getElementById("play-menu");
         playMenu.style.display = "flex";
         buttonValue = 3;
+        rangeTry = rangeSize(buttonValue)-16;
         const allBoxes = document.getElementsByClassName("box");
         for (let i = 0; i < allBoxes.length; i++){
           const oneBox =allBoxes[i];

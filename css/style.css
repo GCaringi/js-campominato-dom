@@ -14,6 +14,28 @@ body{
     justify-content: center;
 }
 
+#winner-tab{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+}
+
+#loose-tab{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+}
+
 h1{
     font-size: 92px;
 }
